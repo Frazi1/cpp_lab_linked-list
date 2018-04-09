@@ -10,18 +10,21 @@ private:
 
 public:
 
-	explicit node(T* value)
-		: value_(value)
-	{
-	}
+	explicit node(T* value);
 
 	node<T>* get_next() const;
-	void set_next(node<T>* const next);
 	node<T>* get_prev() const;
+	T& get_value() const;
+
+	void set_next(node<T>* const next);
 	void set_prev(node<T>* const prev);
-	T* get_value() const;
 	void set_value(T* const value);
 };
+
+template <class T>
+node<T>::node(T* value) : value_(value)
+{
+}
 
 template <class T>
 node<T>* node<T>::get_next() const
@@ -48,7 +51,7 @@ void node<T>::set_prev(node<T>* const prev)
 }
 
 template <class T>
-T* node<T>::get_value() const
+T& node<T>::get_value() const
 {
 	return value_;
 }
