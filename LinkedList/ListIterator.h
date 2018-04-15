@@ -3,39 +3,45 @@
 
 
 template <class T>
-class list_iterator : public std::iterator<std::forward_iterator_tag, node<T>>
+class list_iterator: public std::iterator<std::bidirectional_iterator_tag, node<T>>
 {
 private:
-	node<T>* iter_;
+	node<T>* node_;
 
 public:
-	explicit list_iterator(node<T>* p) : iter_(p)
+	explicit list_iterator(node<T>* p) : node_(p)
 	{
 	}
 
-	bool operator ==(list_iterator& other)
+	bool operator ==(list_iterator other)
 	{
-		return iter_ == other.iter_;
+		return node_ == other.node_;
 	}
 
-	bool operator !=(list_iterator& other)
+	bool operator !=(list_iterator other)
 	{
-		return iter_ != other.iter_;
+		return node_ != other.node_;
 	}
 
-	T& operator *()
+	node<T>& operator *()
 	{
-		return iter_->get_value();
+		return *node_;
 	}
 
-	T& operator ->()
+	node<T>& operator ->()
 	{
-		return iter_->get_value();
+		return *node_;
 	}
 
 	list_iterator& operator ++()
 	{
-		iter_ = iter_->get_next();
+		node_ = node_->get_next();
+		return *this;
+	}
+
+	list_iterator& operator --()
+	{
+		node_ = node_->get_prev();
 		return *this;
 	}
 };
