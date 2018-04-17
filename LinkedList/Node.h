@@ -11,6 +11,10 @@ private:
 public:
 
 	explicit node(T value);
+	~node()
+	{
+		if (next_ != nullptr) delete next_;
+	}
 
 	node<T>* get_next() const;
 	node<T>* get_prev() const;

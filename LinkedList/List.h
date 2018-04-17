@@ -9,9 +9,16 @@ template <class T>
 class list
 {
 private:
-	node<T>* first_;
+	node<T>* first_{};
 	node<T>* last_{};
 public:
+
+	list() = default;
+	~list()
+	{
+		delete first_;
+	}
+
 	void add(T item)
 	{
 		node<T>* new_node = new node<T>(item);
