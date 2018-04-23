@@ -3,7 +3,7 @@
 
 
 template <class T>
-class list_iterator: public std::iterator<std::bidirectional_iterator_tag, node<T>>
+class list_iterator: public std::iterator<std::forward_iterator_tag, node<T>>
 {
 private:
 	node<T>* node_;
@@ -37,25 +37,5 @@ public:
 	{
 		node_ = node_->get_next();
 		return *this;
-	}
-
-	list_iterator operator++(int)
-	{
-		list_iterator ret = *this;
-		++(*this);
-		return ret;
-	}
-
-	list_iterator& operator --()
-	{
-		node_ = node_->get_prev();
-		return *this;
-	}
-
-	list_iterator operator--(int)
-	{
-		list_iterator ret = *this;
-		--(*this);
-		return ret;
 	}
 };
