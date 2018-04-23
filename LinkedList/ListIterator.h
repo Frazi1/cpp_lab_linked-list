@@ -23,14 +23,14 @@ public:
 		return node_ != other.node_;
 	}
 
-	node<T>& operator *()
+	node<T>* operator *()
 	{
-		return *node_;
+		return node_;
 	}
 
-	node<T>& operator ->()
+	node<T>* operator ->()
 	{
-		return *node_;
+		return node_;
 	}
 
 	list_iterator& operator ++()
@@ -39,9 +39,23 @@ public:
 		return *this;
 	}
 
+	list_iterator operator++(int)
+	{
+		list_iterator ret = *this;
+		++(*this);
+		return ret;
+	}
+
 	list_iterator& operator --()
 	{
 		node_ = node_->get_prev();
 		return *this;
+	}
+
+	list_iterator operator--(int)
+	{
+		list_iterator ret = *this;
+		--(*this);
+		return ret;
 	}
 };

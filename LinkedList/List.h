@@ -29,10 +29,9 @@ public:
 		}
 		else
 		{
-			auto& current_last = last_;
-			current_last->set_next(new_node);
-			last_ = current_last->get_next();
-			last_->set_prev(current_last);
+			last_->set_next(new_node);
+			new_node->set_prev(last_);
+			last_ = new_node;
 		}
 	}
 
@@ -49,13 +48,13 @@ public:
 
 	void remove(list_iterator<T>& iterator)
 	{
-		list_iterator<T> iter = begin();
-		while (iter != iterator || iter != end())
-			++iter;
-
-		node<T>* next = (*iter).get_next();
-		node<T>* prev = (*iter).get_prev();
+		node<T>* current = *iterator;
+		node<T>* next = current->get_next();
+		node<T>* prev = current->get_prev();
 		next->set_prev(prev);
 		prev->set_next(next);
+
+		current->set_next(nullptr);
+		delete current;
 	}
 };
